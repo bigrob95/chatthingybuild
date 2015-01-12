@@ -21,5 +21,13 @@ public class User {
 	public int getId() {
 		return id;
 	}
+	
+	public void setPic(Bitmap b) {
+		if (b.getWidth() > b.getHeight()) {
+			this.picture = Bitmap.createBitmap(b, (b.getWidth()-b.getHeight())/2, 0, b.getHeight(), b.getHeight());
+		} else {
+			this.picture = Bitmap.createBitmap(b, 0, (b.getHeight()-b.getWidth())/2, b.getWidth(), b.getWidth());
+		}
+	}
 
 }

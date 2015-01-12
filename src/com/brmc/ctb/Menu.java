@@ -33,15 +33,15 @@ public class Menu extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		connUsers = new int[2];
 		connUsers[0] = 1;
 		connUsers[1] = 2;
 		userDb.add(new User("Max Christian Biegert", 1));
-		getUser(1).picture = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.tw);
+		getUser(1).setPic(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.tw));
 		userDb.add(new User("Robin Maisch", 2));
-		getUser(2).picture = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.ic_launcher);
+		getUser(2).setPic(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.nc));
 		LinearLayout ll‹ber = new LinearLayout(getApplicationContext());
 		ScrollView sv = new ScrollView(getApplicationContext());
 		ll‹ber.addView(sv);
