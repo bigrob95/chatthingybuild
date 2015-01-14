@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -102,20 +103,23 @@ public class Messenger extends Activity {
 
 		etMsg.setTypeface(font);
 		(findViewById(R.id.llEt)).setBackgroundColor(Color.argb(128, 255, 255, 255));
-		
-		if (getIntent().hasExtra("Forward")) etMsg.setText(getIntent().getStringExtra("Forward"));
+
+		if (getIntent().hasExtra("Forward"))
+			etMsg.setText(getIntent().getStringExtra("Forward"));
 	}
 
 	protected void addMessage(Message msg) {
 		// Fügt dem Fenster eine Nachricht hinzu. Wird von setUser() und
 		// bSend.OnClickListener.OnClick() aufgerufen
 		boolean putSpace = (history.size() > 0) ? msg.sentById != history.get(history.size() - 1).sentById : false;
-		MsgTV msgtv = new MsgTV(getApplicationContext(), msg.msg, msg.sentById == myId, msg.date, putSpace);
+		MsgTV msgtv = new MsgTV(this, msg.msg, msg.sentById == myId, msg.date, putSpace);
 		registerForContextMenu(msgtv);
+
+		Log.i(tag, "Ist msgtv.tvMsg == null? " + msgtv.getChildAt(0).equals(null));
+
+		Linkify.addLinks(msgtv.getTvMsg(), Linkify.ALL);
 		msgs.addView(msgtv);
 
-		Log.i(tag, "MsgTV.getWidth = " + msgtv.getWidth());
-		Log.i(tag, msgs.getWidth() + "");
 		etMsg.setText("");
 		history.add(msg);
 	}
@@ -224,13 +228,13 @@ public class Messenger extends Activity {
 		ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 		ClipData clip = ClipData.newPlainText("msg", ((MsgTV) msgs.getChildAt(selMsg)).msg);
 		switch (item.getItemId()) {
-		case R.id.itemCopy : 
+		case R.id.itemCopy:
 			clipboard.setPrimaryClip(clip);
 			selMsg = -1;
 			Toast.makeText(getApplicationContext(), "In Zwischenablage kopiert.", Toast.LENGTH_LONG).show();
 			break;
-		case R.id.itemDelete : 
-			
+		case R.id.itemDelete:
+
 			history.remove(selMsg);
 			msgs.removeViewAt(selMsg);
 			selMsg = -1;
@@ -239,7 +243,7 @@ public class Messenger extends Activity {
 			Intent intent = new Intent("com.brmc.ctb.MENU");
 			intent.putExtra("Forward", ((MsgTV) msgs.getChildAt(selMsg)).msg);
 			selMsg = -1;
-			
+
 			startActivity(intent);
 		}
 		return super.onContextItemSelected(item);

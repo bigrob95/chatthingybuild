@@ -51,9 +51,10 @@ public class MsgTV extends LinearLayout {
 
 		
 		
+		
 		this.setOrientation(LinearLayout.VERTICAL);
 		font = Typeface.createFromAsset(context.getAssets(), "fonts/AppleColorEmoji.ttf");
-		TextView tvMsg = new TextView(context), tvDate = new TextView(context);
+		tvMsg = new TextView(context); tvDate = new TextView(context);
 		LinearLayout llBox = new LinearLayout(context);
 		llBox.setOrientation(LinearLayout.VERTICAL);
 		LayoutParams thisLP = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -92,7 +93,7 @@ public class MsgTV extends LinearLayout {
 		tvMsg.setText(msg);
 		tvDate.setText(getDateFormat(date));
 		
-		Linkify.addLinks(tvMsg, Linkify.ALL);
+
 		
 		llBox.addView(tvMsg);
 		llBox.addView(tvDate);
@@ -114,5 +115,7 @@ public class MsgTV extends LinearLayout {
 			return DateFormat.format("dd.MM.yyyy HH:mm", date);
 		}
 	}
+	
+	public TextView getTvMsg() {return tvMsg;}
 
 }
