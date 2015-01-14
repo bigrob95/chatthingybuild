@@ -219,11 +219,12 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020000;
         public static final int nc=0x7f020001;
         public static final int tw=0x7f020002;
+        public static final int wallpaper=0x7f020003;
     }
     public static final class id {
         public static final int alignBounds=0x7f040002;
         public static final int alignMargins=0x7f040003;
-        public static final int bSend=0x7f040018;
+        public static final int bSend=0x7f04001b;
         public static final int bottom=0x7f040005;
         public static final int center=0x7f04000c;
         public static final int center_horizontal=0x7f04000a;
@@ -231,24 +232,33 @@ containing a value of this type.
         public static final int clip_horizontal=0x7f04000f;
         public static final int clip_vertical=0x7f04000e;
         public static final int end=0x7f040011;
-        public static final int etMsg=0x7f040017;
+        public static final int etMsg=0x7f04001a;
         public static final int fill=0x7f04000d;
         public static final int fill_horizontal=0x7f04000b;
         public static final int fill_vertical=0x7f040009;
         public static final int horizontal=0x7f040000;
-        public static final int ibProfile=0x7f040012;
+        public static final int ibProfile=0x7f040014;
+        public static final int imageView1=0x7f040013;
+        public static final int itemCopy=0x7f04001c;
+        public static final int itemDelete=0x7f04001d;
+        public static final int itemFw=0x7f04001e;
         public static final int left=0x7f040006;
-        public static final int lyMsges=0x7f040016;
+        public static final int llAll=0x7f040012;
+        public static final int llEt=0x7f040019;
+        public static final int lyMsges=0x7f040018;
         public static final int right=0x7f040007;
         public static final int start=0x7f040010;
-        public static final int sv=0x7f040015;
+        public static final int sv=0x7f040017;
         public static final int top=0x7f040004;
-        public static final int tvName=0x7f040013;
-        public static final int tvNumber=0x7f040014;
+        public static final int tvName=0x7f040015;
+        public static final int tvNumber=0x7f040016;
         public static final int vertical=0x7f040001;
     }
     public static final class layout {
         public static final int messenger=0x7f030000;
+    }
+    public static final class menu {
+        public static final int msgtvcm=0x7f080000;
     }
     public static final class string {
         public static final int app_name=0x7f060000;

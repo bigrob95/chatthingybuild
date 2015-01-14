@@ -6,6 +6,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.format.DateFormat;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,26 +16,28 @@ import android.view.View.OnLongClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MsgTV extends LinearLayout implements OnLongClickListener {
+public class MsgTV extends LinearLayout {  
 	private static final String tag = "ctb";
 	String msg;
 	boolean fromMe;
 	long date;
-
-	public MsgTV(Context context, String msg, boolean fromMe, long date) {
+	boolean putSpace;
+	public MsgTV(Context context, String msg, boolean fromMe, long date, boolean putSpace) {
 		super(context);
 		this.msg = msg;
 		this.fromMe = fromMe;
 		this.date = date;
+		this.putSpace = putSpace;
 		create(context);
 
 	}
 
-	public MsgTV(Context context, AttributeSet attrs, String msg, boolean fromMe, long date) {
+	public MsgTV(Context context, AttributeSet attrs, String msg, boolean fromMe, long date, boolean putSpace) {
 		super(context, attrs);
 		this.msg = msg;
 		this.fromMe = fromMe;
 		this.date = date;
+		this.putSpace = putSpace;
 		create(context);
 
 	}
@@ -45,6 +49,8 @@ public class MsgTV extends LinearLayout implements OnLongClickListener {
 		// TODO Auto-generated method stub
 		Log.i(tag, msg + "/" + date);
 
+		
+		
 		this.setOrientation(LinearLayout.VERTICAL);
 		font = Typeface.createFromAsset(context.getAssets(), "fonts/AppleColorEmoji.ttf");
 		TextView tvMsg = new TextView(context), tvDate = new TextView(context);
@@ -57,9 +63,12 @@ public class MsgTV extends LinearLayout implements OnLongClickListener {
 		llBoxLP.gravity = (!fromMe) ? Gravity.LEFT : Gravity.RIGHT;
 		tvDateLP.gravity = Gravity.RIGHT;
 
+		thisLP.setMargins((fromMe) ? 255 : 0, (putSpace) ? 10 : 0, (!fromMe) ? 255 : 0, 0);
+		tvLP.setMargins(20, 10, 20, 0);
+		tvDateLP.setMargins(0, -10, 20, 0);
+		tvDate.setPadding(20, 0, 0, 0);
+		tvMsg.setAutoLinkMask(0);
 		
-		tvLP.setMargins(20, 10, 20, 10);
-		tvDateLP.setMargins(0, 0, 20, 0);
 		
 		
 		llBox.setLayoutParams(llBoxLP);
@@ -83,15 +92,17 @@ public class MsgTV extends LinearLayout implements OnLongClickListener {
 		tvMsg.setText(msg);
 		tvDate.setText(getDateFormat(date));
 		
+		Linkify.addLinks(tvMsg, Linkify.ALL);
 		
 		llBox.addView(tvMsg);
 		llBox.addView(tvDate);
 		addView(llBox);
+	
 	}
 
-	@Override
+	//@Override
 	public boolean onLongClick(View v) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 

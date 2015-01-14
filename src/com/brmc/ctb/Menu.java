@@ -111,7 +111,9 @@ public class Menu extends Activity {
 		@Override
 		public void onClick(View v) {
 			v.setBackgroundColor(Color.BLUE);
+			
 			Intent intent = new Intent("com.brmc.ctb.MESSENGER");
+			if (getIntent().hasExtra("Forward")) {intent.putExtra("Forward", getIntent().getStringExtra("Forward"));}
 			intent.putExtra("id", id);
 			startActivity(intent);
 			v.setBackgroundColor(Color.TRANSPARENT);
